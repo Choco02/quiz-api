@@ -3,6 +3,9 @@ import axios, { AxiosError } from 'axios';
 import { HttpStatus } from '../src/enums';
 import { router } from '../src/routes';
 import express from 'express';
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
 
 const app = express();
 
@@ -14,9 +17,10 @@ const server = app.listen(3000);
 
 axios.defaults.baseURL = 'http://localhost:3000';
 
-beforeAll(() => {
+beforeAll(async () => {
     
     // TODO
+    await prisma.user.deleteMany({});
 
 });
 
