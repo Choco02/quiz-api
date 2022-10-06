@@ -96,7 +96,7 @@ describe('login route', () => {
 
     });
 
-    test('email not found', async () => {
+    test('account not found', async () => {
 
         await axios.post('/login', {
             email: 'wrong@email',
@@ -140,6 +140,64 @@ describe('login route', () => {
 
         expect(response.status).toBe(HttpStatus.Ok);
         expect(response.data).toHaveProperty('token');
+
+    });
+
+});
+
+describe('quiz route', () => {
+
+    
+    const adminEmail = 'admin@test';
+    const adminPassword = 'passwordadm';
+
+    const getAdminCredentials = async () => {
+
+        const { token } = await axios.post('/login', {
+            email: adminEmail,
+            password: adminPassword
+        }).then(r => r.data as { token: string });
+
+        const config = {
+            headers: {
+                Authorization: 'Bearer ' + token
+            }
+        };
+
+        return config;
+    };
+
+    test('missing admin role', async () => {
+
+        const playerEmail = 'onlytest@test';
+        const playerPassword = 'passwordtest';
+
+        const { token } = await axios.post('/login', {
+            email: playerEmail,
+            password: playerPassword
+        }).then(r => r.data as { token: string });
+
+
+        await axios.post('/create-questions', {}, {
+            headers:{
+                Authorization: 'Bearer ' + token,
+            }
+        })
+            .catch((err: AxiosError) => {
+
+                expect(err.response?.status).toBe(HttpStatus.Forbidden);
+                expect(err.response?.data).toEqual({ message: 'You need admin role' });
+
+            });
+
+    });
+
+    test('no questions sent', async () => {
+
+        await axios.post('/create-questions', {}, await getAdminCredentials())
+            .catch((err: AxiosError) => {
+                expect(err.response?.status).toBe(HttpStatus.BadRequest);
+            });
 
     });
 
