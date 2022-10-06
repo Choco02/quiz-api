@@ -1,9 +1,5 @@
-
-import { PrismaClient } from '@prisma/client';
+import { prisma } from './prisma.client';
 import { generatePasswordHash } from '../util';
-
-const prisma = new PrismaClient();
-
 export class AccountService {
 
     async create(data: RegisterData) {
