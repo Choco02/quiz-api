@@ -2,7 +2,7 @@ import { Router, Request, Response, NextFunction } from 'express';
 import helmet from 'helmet';
 import jwt from 'jsonwebtoken';
 import { HttpStatus } from './enums';
-import { AccountController } from './controllers';
+import { AccountController, QuizController } from './controllers';
 
 const router = Router();
 
@@ -19,7 +19,8 @@ const authenticate = (req: Request, res: Response, next: NextFunction) => {
     const [, token ] = req.headers.authorization.split(' ');
 
     try {
-        const userData = jwt.verify(token, process.env.SECRET as string) as Request['userData'];
+        const userData = jwt.verify(token, process.env.JWT_SECRET as string) as Request['userData'];
+        // console.log(userData);
         req.userData = userData;
 
     }
@@ -37,5 +38,7 @@ router.use(authenticate);
 
 router.post('/register', AccountController.register);
 router.post('/login', AccountController.login);
+
+router.post('/create-questions', QuizController.create);
 
 export { router };
