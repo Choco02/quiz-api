@@ -201,4 +201,107 @@ describe('quiz route', () => {
 
     });
 
+    test('create question using invalid data', async () => {
+
+        const config = await getAdminCredentials();
+
+        const question = '2 + 2';
+        const category = 'math';
+
+
+        await axios.post('/create-questions', {
+            questions: [
+                {
+                    test: 'test'
+                }
+            ]
+        }, config)
+            .catch((err: AxiosError) => {
+                expect(err.response?.status).toBe(HttpStatus.BadRequest);
+            });
+
+        await axios.post('/create-questions', {
+            questions: [
+                {
+                    question
+                }
+            ]
+        }, config)
+            .catch((err: AxiosError) => {
+                expect(err.response?.status).toBe(HttpStatus.BadRequest);
+            });
+
+        await axios.post('/create-questions', {
+            questions: [
+                {
+                    question,
+                    category
+                }
+            ]
+        }, config)
+            .catch((err: AxiosError) => {
+                expect(err.response?.status).toBe(HttpStatus.BadRequest);
+            });
+
+        await axios.post('/create-questions', {
+            questions: [
+                {
+                    question,
+                    category,
+                    answer1: { content: '3', right: false },
+                    answer2: { content: '4', right: false }
+                }
+            ]
+        }, config)
+            .catch((err: AxiosError) => {
+                expect(err.response?.status).toBe(HttpStatus.BadRequest);
+            });
+    
+        await axios.post('/create-questions', {
+            questions: [
+                {
+                    question,
+                    category,
+                    answer1: { content: '3', right: false },
+                    answer2: { content: '9', right: false },
+                    answer3: { content: '4', right: false }
+                }
+            ]
+        }, config)
+            .catch((err: AxiosError) => {
+                expect(err.response?.status).toBe(HttpStatus.BadRequest);
+            });
+
+        await axios.post('/create-questions', {
+            questions: [
+                {
+                    question,
+                    category,
+                    answer1: { content: '3', right: false },
+                    answer2: { content: '9', right: true },
+                    answer3: { content: '4', right: true }
+                }
+            ]
+        }, config)
+            .catch((err: AxiosError) => {
+                expect(err.response?.status).toBe(HttpStatus.BadRequest);
+            });
+
+        const res = await axios.post('/create-questions', {
+            questions: [
+                {
+                    question,
+                    category,
+                    answer1: { content: '3', right: false },
+                    answer2: { content: '9', right: false },
+                    answer3: { content: '4', right: true }
+                }
+            ]
+        }, config);
+
+        expect(res.status).toBe(HttpStatus.Created);
+                
+
+    });
+
 });
