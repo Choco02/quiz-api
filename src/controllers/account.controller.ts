@@ -39,7 +39,7 @@ export class AccountController {
             });
         }
         catch(err) {
-            console.log(err);
+            // console.log(err);
             return res.status(HttpStatus.Conflict)
                 .send({ message: 'Email already registered' });
         }
