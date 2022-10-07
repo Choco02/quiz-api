@@ -26,6 +26,10 @@ export const validateQuestions = (data: Quiz) => {
         const answers: string[] = Object.keys(question)
             .filter(i => i.includes('answer'));
 
+        if (answers.length !== 3) {
+            return { validated: false, err: 'Invalid answers length' };
+        }
+
         const filterQuestions = (option: boolean) => {
             return answers.filter(
                 // @ts-ignore
