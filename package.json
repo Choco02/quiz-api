@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "yarn ts-node-dev --respawn --transpile-only src/.",
     "build": "yarn tsc",
-    "lint": "yarn lint",
+    "lint": "yarn eslint",
     "test": "jest"
   },
   "dependencies": {
