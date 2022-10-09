@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { HttpStatus } from '../enums';
 import { QuizService } from '../services/quiz.service';
-import { hideCorrectAnswers, validateQuestions } from '../util';
+import { hideCorrectAnswers, shuffle, validateQuestions } from '../util';
 
 const quiz = new QuizService();
 
@@ -35,4 +35,27 @@ export class QuizController {
         return res.status(HttpStatus.Ok).send({ questions: data.questions });
     }
 
+    static async start(req: Request, res: Response) {
+
+        const data = await quiz.start();
+
+        if (data.questions.length < 10) {
+
+            const neededQuestions = 10 - data.questions.length;
+
+            return res
+                .status(HttpStatus.Conflict)
+                .send({
+                    message: 'Insufficient number of registered questions, '+
+                    `${neededQuestions} more questions needed`
+                });
+        }
+
+        if (req.userData.role !== 'admin') hideCorrectAnswers(data);
+
+        const pickedQuestions = shuffle(data.questions).slice(0, 10);
+
+        res.status(HttpStatus.Ok).send({ questions: pickedQuestions });
+
+    }
 }
