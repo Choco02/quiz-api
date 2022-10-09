@@ -10,7 +10,7 @@ export class AccountService {
         } as { email: string, password: string, name?: string, role?: string };
 
         if (data.name) dataToSave.name = data.name;
-        if (data.role) dataToSave.role = data.role;
+        if (data.role && data.role === 'admin') dataToSave.role = data.role;
 
         return await prisma.user.create({
             data: dataToSave
