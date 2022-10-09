@@ -41,5 +41,6 @@ router.post('/login', AccountController.login);
 
 router.post('/create-questions', QuizController.create);
 router.get('/find-questions', QuizController.find);
+router.get('/start-quiz', QuizController.start);
 
 export { router };
