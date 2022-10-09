@@ -27,4 +27,11 @@ export class QuizService {
 
         return dataFound;
     }
+
+    async start() {
+
+        const data = await this.find();
+
+        return data;
+    }
 }
