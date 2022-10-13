@@ -39,3 +39,12 @@ interface ValidatedReturn {
     validated: boolean,
     err: string
 }
+
+interface QuizReplyData {
+    questionId: number;
+    questionReplied: '1'|'2'|'3';
+}
+
+interface QuizReply {
+    questions: QuizReplyData[];
+}
