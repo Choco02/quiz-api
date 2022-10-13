@@ -122,3 +122,20 @@ export const shuffle = (array: QuizData[]) => {
 
     return array;
 };
+
+export const validateReply = (data: QuizReply) => {
+
+    for (const d of data.questions) {
+
+        if (typeof d.questionId !== 'number') {
+            return { validated: false, err: `questionId is not a number at questions[${data.questions.indexOf(d)}]` };
+        }
+        if (![ '1', '2', '3' ].includes(d.questionReplied)) {
+            return { validated: false, err: 'questionReplied need to be "1", "2" or "3"' };
+        }
+
+    }
+
+    return { validated: true, err: '' };
+
+};
