@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { HttpStatus } from '../enums';
 import { QuizService } from '../services/quiz.service';
-import { hideCorrectAnswers, shuffle, validateQuestions } from '../util';
+import { hideCorrectAnswers, shuffle, validateQuestions, validateReply } from '../util';
 
 const quiz = new QuizService();
 
@@ -56,6 +56,25 @@ export class QuizController {
         const pickedQuestions = shuffle(data.questions).slice(0, 10);
 
         res.status(HttpStatus.Ok).send({ questions: pickedQuestions });
+
+    }
+
+    static async reply(req: Request, res: Response) {
+
+        const data = req.body as QuizReply;
+
+        if (!data?.questions) return res.status(HttpStatus.BadRequest)
+            .send({ message: 'Missing questions' });
+
+        if (data.questions.length < 10) return res.status(HttpStatus.BadRequest)
+            .send({ message: '10 questions is required' });
+
+        const { validated, err } = validateReply(data);
+
+        if (!validated) return res.status(HttpStatus.BadRequest)
+            .send({ message: err });
+
+        res.status(HttpStatus.Ok).send(await quiz.reply(data.questions));
 
     }
 }
