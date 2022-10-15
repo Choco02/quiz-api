@@ -77,4 +77,12 @@ export class QuizController {
         res.status(HttpStatus.Ok).send(await quiz.reply(data.questions, req.userData));
 
     }
+
+    static async score(req: Request, res: Response) {
+
+        const data = await quiz.score();
+
+        return res.status(HttpStatus.Ok).send({ scoreboard: data });
+
+    }
 }
