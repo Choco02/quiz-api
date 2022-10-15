@@ -1,12 +1,12 @@
 {
-  "name": "backend",
+  "name": "quiz-api",
   "version": "1.0.0",
   "main": "dist/index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "yarn ts-node-dev --respawn --transpile-only src/.",
-    "build": "yarn tsc",
-    "lint": "yarn eslint",
+    "dev": "npx ts-node-dev --respawn --transpile-only src/.",
+    "build": "npx tsc",
+    "lint": "npx eslint",
     "test": "jest"
   },
   "dependencies": {
