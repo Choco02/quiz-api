@@ -88,4 +88,18 @@ export class QuizService {
         return { wrong, right, points };
 
     }
+
+    async score() {
+
+        const data = await prisma.point.findMany({ include: { author: true } });
+
+        data.forEach(p => {
+            // @ts-ignore
+            delete p.author.password;
+            // @ts-ignore
+            delete p.author.email;
+        });
+
+        return data;
+    }
 }
