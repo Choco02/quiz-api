@@ -1,0 +1,347 @@
+{
+	"info": {
+		"_postman_id": "f47c6a73-30cc-4979-8c0e-9ce6fc9887f5",
+		"name": "routes",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "account routes",
+			"item": [
+				{
+					"name": "register admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"adm@adm.adm\",\r\n    \"password\": \"adm\",\r\n    \"role\": \"admin\",\r\n    \"name\": \"Sofia\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"register"
+							]
+						},
+						"description": "# Rota para criar uma conta com permissão de admin"
+					},
+					"response": []
+				},
+				{
+					"name": "register player",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"player@mail.com\",\r\n    \"password\": \"player\",\r\n    \"name\": \"Alice\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"register"
+							]
+						},
+						"description": "# Rota para criar conta com permissão de player"
+					},
+					"response": []
+				},
+				{
+					"name": "login admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"adm@adm.adm\",\r\n    \"password\": \"adm\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login player",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"player@mail.com\",\r\n    \"password\": \"player\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "quiz routes",
+			"item": [
+				{
+					"name": "create-questions",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"questions\": [\r\n        {\r\n            \"question\": \"Quem foi a primeira pessoa a programar?\",\r\n            \"category\": \"tecnologia\",\r\n            \"answer1\": { \"content\": \"Ada Lovelace\", \"right\": true },\r\n            \"answer2\": { \"content\": \"Grace Hopper\", \"right\": false },\r\n            \"answer3\": { \"content\": \"Linus Torvalds\", \"right\": false }\r\n        },\r\n        {\r\n            \"question\": \"Quem criou o primeiro compilador?\",\r\n            \"category\": \"tecnologia\",\r\n            \"answer1\": { \"content\": \"Alan Turing\", \"right\": false },\r\n            \"answer2\": { \"content\": \"Silvio Santos\", \"right\": false },\r\n            \"answer3\": { \"content\": \"Grace Hopper\", \"right\": true }\r\n        },\r\n        {\r\n            \"question\": \"Quem derrotou a Enigma?\",\r\n            \"category\": \"tecnologia\",\r\n            \"answer1\": { \"content\": \"Celso Portioli\", \"right\": false },\r\n            \"answer2\": { \"content\": \"Alan Turing\", \"right\": true },\r\n            \"answer3\": { \"content\": \"Linus Torvalds\", \"right\": false }\r\n        },\r\n        {\r\n            \"question\": \"Quais dessas redes NÃO pertence ao Facebook?\",\r\n            \"category\": \"tecnologia\",\r\n            \"answer1\": { \"content\": \"Youtube\", \"right\": true },\r\n            \"answer2\": { \"content\": \"Instagram\", \"right\": false },\r\n            \"answer3\": { \"content\": \"WhatsApp\", \"right\": false }\r\n        },\r\n        {\r\n            \"question\": \"Quanto é 10 - 2.5?\",\r\n            \"category\": \"matemática\",\r\n            \"answer1\": { \"content\": \"8.5\", \"right\": false },\r\n            \"answer2\": { \"content\": \"6.5\", \"right\": false },\r\n            \"answer3\": { \"content\": \"7.5\", \"right\": true }\r\n        },\r\n        {\r\n            \"question\": \"Quais desses NÃO é o nome de um gênero musical?\",\r\n            \"category\": \"música\",\r\n            \"answer1\": { \"content\": \"Brega\", \"right\": false },\r\n            \"answer2\": { \"content\": \"Pop\", \"right\": false },\r\n            \"answer3\": { \"content\": \"Sofrência\", \"right\": true }\r\n        },\r\n        {\r\n            \"question\": \"Qual das opções NÃO é um alimento?\",\r\n            \"category\": \"comida\",\r\n            \"answer1\": { \"content\": \"Nabana\", \"right\": true },\r\n            \"answer2\": { \"content\": \"Maçã\", \"right\": false },\r\n            \"answer3\": { \"content\": \"Sopa\", \"right\": false }\r\n        },\r\n        {\r\n            \"question\": \"Quais desses estados NÃO pertence à região Sudeste do Brasil?\",\r\n            \"category\": \"geografia\",\r\n            \"answer1\": { \"content\": \"Rio de Janeiro\", \"right\": false },\r\n            \"answer2\": { \"content\": \"Minas Gerais\", \"right\": false },\r\n            \"answer3\": { \"content\": \"Bahia\", \"right\": true }\r\n        },\r\n        {\r\n            \"question\": \"Qual dessas frases é um paradoxo?\",\r\n            \"category\": \"paradoxo\",\r\n            \"answer1\": { \"content\": \"\\\"Quem com ferro fere, com ferro será ferido\\\"\", \"right\": false },\r\n            \"answer2\": { \"content\": \"\\\"A próxima frase é verdadeira, a última é falsa\\\"\", \"right\": true },\r\n            \"answer3\": { \"content\": \"\\\"Casa de ferreiro, espeto de pau\\\"\", \"right\": false }\r\n        },\r\n        {\r\n            \"question\": \"Qual é a área de física que estuda os elementos em escala atômica ou subatômica?\",\r\n            \"category\": \"física\",\r\n            \"answer1\": { \"content\": \"Mecânica dos fluidos\", \"right\": false },\r\n            \"answer2\": { \"content\": \"Mecânica quântica\", \"right\": true },\r\n            \"answer3\": { \"content\": \"Hidráulica\", \"right\": false }\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/create-questions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"create-questions"
+							]
+						},
+						"description": "# Rota para registrar as questões para o quiz \nPode ser enviado qualquer quantidade de perguntas, no mínimo uma é requerida. O quiz só funcionará se houver no mínimo 10 perguntas registradas."
+					},
+					"response": []
+				},
+				{
+					"name": "find-questions",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/find-questions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"find-questions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "start-quiz",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/start-quiz",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"start-quiz"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "reply-quiz",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"questions\": [\r\n        {\r\n            \"questionId\": 4,\r\n            \"questionReplied\": \"1\"\r\n        },\r\n        {\r\n            \"questionId\": 9,\r\n            \"questionReplied\": \"2\"\r\n        },\r\n        {\r\n            \"questionId\": 5,\r\n            \"questionReplied\": \"3\"\r\n        },\r\n        {\r\n            \"questionId\": 2,\r\n            \"questionReplied\": \"2\"\r\n        },\r\n        {\r\n            \"questionId\": 3,\r\n            \"questionReplied\": \"1\"\r\n        },\r\n        {\r\n            \"questionId\": 10,\r\n            \"questionReplied\": \"2\"\r\n        },\r\n        {\r\n            \"questionId\": 8,\r\n            \"questionReplied\": \"1\"\r\n        },\r\n        {\r\n            \"questionId\": 7,\r\n            \"questionReplied\": \"3\"\r\n        },\r\n        {\r\n            \"questionId\": 6,\r\n            \"questionReplied\": \"1\"\r\n        },\r\n        {\r\n            \"questionId\": 1,\r\n            \"questionReplied\": \"1\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/reply-quiz",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"reply-quiz"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "scoreboard",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/scoreboard",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"scoreboard"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer"
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
