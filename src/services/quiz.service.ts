@@ -1,5 +1,6 @@
 import { objToJson, jsonToObj } from '../util';
 import { prisma } from './prisma.client';
+import { Request } from 'express';
 
 export class QuizService {
 
@@ -35,7 +36,7 @@ export class QuizService {
         return data;
     }
 
-    async reply(questions: QuizReplyData[]) {
+    async reply(questions: QuizReplyData[], userData: Request['userData']) {
 
         const questionIds = questions.map(q => q.questionId);
 
@@ -78,6 +79,11 @@ export class QuizService {
                 wrong++;
             }
         }
+
+        await prisma.point.create({ data: {
+            authorId: Number(userData.id),
+            number: points
+        } });
 
         return { wrong, right, points };
 
