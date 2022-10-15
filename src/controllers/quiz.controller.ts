@@ -74,7 +74,7 @@ export class QuizController {
         if (!validated) return res.status(HttpStatus.BadRequest)
             .send({ message: err });
 
-        res.status(HttpStatus.Ok).send(await quiz.reply(data.questions));
+        res.status(HttpStatus.Ok).send(await quiz.reply(data.questions, req.userData));
 
     }
 }
