@@ -43,5 +43,6 @@ router.post('/create-questions', QuizController.create);
 router.get('/find-questions', QuizController.find);
 router.get('/start-quiz', QuizController.start);
 router.post('/reply-quiz', QuizController.reply);
+router.get('/scoreboard', QuizController.score);
 
 export { router };
